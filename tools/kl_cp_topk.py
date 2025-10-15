@@ -14,17 +14,9 @@ def scale(x):
 # for alpha in [0.05,0.1,0.15,0.2,0.25,0.3]
 # for alpha in [0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9]:
 # for alpha in [0.06,0.07,0.08,0.09,0.11,0.12,0.13,0.14,0.16,0.17,0.18,0.19]:
-for alpha in [0.21,0.22,0.23,0.24,0.25]:
+for alpha in [0.05,0.1,0.15,0.2,0.25,0.3,0.06,0.07,0.08,0.09,0.11,0.12,0.13,0.14,0.16,0.17,0.18,0.19,0.21,0.22,0.23,0.24]:
     for fold in [0,1,2,3]:
         print("alpha {} | fold {}".format(alpha, fold))
-
-# alpha = 0.05
-
-# alpha = 0.1
-
-# alpha = 0.15
-
-# alpha = 0.2
 
         topk = None
         if fold == 0:
@@ -42,17 +34,6 @@ for alpha in [0.21,0.22,0.23,0.24,0.25]:
         if fold == 3:
             annotation_path = "./output_seg_images/output_vit-laion2b-in21k_trn_all_folder3_seed0/annotation-all-review.json"
             sim_path = "./dataset/VOC2012/features_vit-laion2b-in21k_trn/folder3_similarity.json"
-
-        # annotation_path = "./output_seg_images/output_vit-laion2b-in21k_trn_all_folder3_seed0/annotation-all-review.json"
-        # annotation_path = "./output_seg_images/all_output_vit-laion2b_trn-all_folder0_seed0/annotation-all.json"
-        # annotation_path = "./output_seg_images/all_output_vit-laion2b_trn-all_folder0_seed0/annotation-all-float.json"
-        # annotation_path = "./output_seg_images/all_output_vit-laion2b_trn-all_folder1_seed0/annotation-all.json"
-        # annotation_path = "./output_seg_images/all_output_vit-laion2b_trn-all_folder2_seed0/annotation-all.json"
-
-        # sim_path = "./dataset/VOC2012/features_vit-laion2b-in21k_trn/folder3_similarity.json"
-        # sim_path = "./dataset/VOC2012/features_vit-laion2b-in21k_trn/folder0_similarity.json"
-        # sim_path = "./dataset/VOC2012/features_vit-laion2b-in21k_trn/folder1_similarity.json"
-        # sim_path = "./dataset/VOC2012/features_vit-laion2b-in21k_trn/folder2_similarity.json"
 
         with open(annotation_path) as f:
             ious_ = json.load(f)
@@ -134,21 +115,3 @@ for alpha in [0.21,0.22,0.23,0.24,0.25]:
         w = open("./topall_json/kl_set_fold{}_{}_sum1.json".format(fold, alpha), "w")
         # w = open("./topk_json/kl_set_fold{}_{}_sum1.json".format(fold, alpha), "w")
         json.dump(kl_set, w)
-
-
-# for img_name in sims_.keys():
-#     sim_ = []
-#     iou_ = []
-#     # print(sims_[query_name].keys())
-#     for query_name in sims_[img_name].keys():
-#         if query_name not in ious_:
-#             print(query_name)
-#             continue
-#         else:
-#             sim = sims_[img_name][query_name]
-#             assert sims_[img_name][query_name] == sims_[query_name][img_name]
-#             iou = ious_[query_name][img_name]
-#             iou_.append(iou)
-#             sim_.append(sim)
-#     iou_arr = np.asarray(iou_)
-#     sim_arr = np.asarray(sim_)
